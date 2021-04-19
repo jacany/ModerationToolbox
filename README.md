@@ -14,7 +14,7 @@
 - [ ] Kicking Players
 
 ## Building from Source
-Run `git clone --recursive https://github.com/Fallen-Networks/ModerationToolbox.git` to clone the repository.
+Run `git clone https://github.com/Fallen-Networks/ModerationToolbox.git` to clone the repository.
 
 There are two ways to build. <br />
 <a href="#visual-studio-2019">Visual Studio 2019</a> <br />
