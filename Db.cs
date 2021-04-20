@@ -12,7 +12,8 @@ namespace ModerationToolbox
             public string Username { get; set; }
             public string Type { get; set; }
             public string UserId { get; set; }
-            public string Reason { get; set; }
+            public string Reason { get; set; } = null;
+            public bool Unpunished { get; set; } = false;
             public string Issuer { get; set; }
             public string IssuerId { get; set; } = null;
             public string Ip { get; set; }
@@ -39,19 +40,53 @@ create table if not exists Punishments
 (
     Id       int auto_increment
         primary key,
-    Username longtext    null,
-    Type     longtext    null,
-    UserId   longtext    null,
+    Username longtext    not null,
+    Type     longtext    not null,
+    UserId   longtext    not null,
     Reason   longtext    null,
-    Issuer   longtext    null,
+    Unpunished tinyint(1) default 0 not null,
+    Issuer   longtext    not null,
     IssuerId longtext    null,
-    Ip       longtext    null,
+    Ip       longtext    not null,
     Length   int         not null,
     Issued   datetime(6) not null
 );";
                         await command.ExecuteNonQueryAsync();
                     }
 
+
+                    db.Dispose();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+        }
+
+        public static async void AddPunishment(Punishment punishment)
+        {
+            try
+            {
+                using (var db = new MySql())
+                {
+                    await db.Connection.OpenAsync();
+
+                    using (var command = new MySqlCommand())
+                    {
+                        command.Connection = db.Connection;
+                        command.CommandText = "INSERT INTO Punishments (Username, Type, UserId, Reason, Issuer, IssuerId, Ip, Length, Issued) VALUES (@Username, @Type, @UserId, @Reason, @Issuer, @IssuerId, @Ip, @Length, @Issued)";
+                        command.Parameters.AddWithValue("@Username", punishment.Username);
+                        command.Parameters.AddWithValue("@Type", punishment.Type);
+                        command.Parameters.AddWithValue("@UserId", punishment.UserId);
+                        command.Parameters.AddWithValue("@Reason", punishment.Reason);
+                        command.Parameters.AddWithValue("@Issuer", punishment.IssuerId);
+                        command.Parameters.AddWithValue("@IssuerId", punishment.IssuerId);
+                        command.Parameters.AddWithValue("@Ip", punishment.Ip);
+                        command.Parameters.AddWithValue("@Length", punishment.Length);
+                        command.Parameters.AddWithValue("@Issued", punishment.Issued);
+                        await command.ExecuteNonQueryAsync();
+                    }
 
                     db.Dispose();
                 }
