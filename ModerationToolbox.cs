@@ -1,12 +1,14 @@
 ﻿using System;
 using Exiled.API.Enums;
 using Exiled.API.Features;
+using Player = Exiled.Events.Handlers.Player;
 
 namespace ModerationToolbox
 {
     public class ModerationToolbox : Plugin<Config>
     {
         public static ModerationToolbox Instance { get; } = new ModerationToolbox();
+
         private ModerationToolbox() { }
 
         public override string Name { get; } = "ModerationToolbox";
@@ -17,16 +19,34 @@ namespace ModerationToolbox
 
         public override PluginPriority Priority { get; } = PluginPriority.Medium;
 
+        private Handlers.Player _player;
+
         public override void OnEnabled()
         {
             if (!Config.IsEnabled) return;
             Log.Info("Enabled :)");
+            RegisterEvents();
             Db.SyncDb();
         }
 
         public override void OnDisabled()
         {
             Log.Info("Disabled :(");
+            UnregisterEvents();
         }
-	}
+
+        private void RegisterEvents()
+        {
+            _player = new Handlers.Player();
+
+            Player.Banning += _player.OnBan;
+        }
+
+        private void UnregisterEvents()
+        {
+            Player.Banning -= _player.OnBan;
+
+            _player = null;
+        }
+    }
 }

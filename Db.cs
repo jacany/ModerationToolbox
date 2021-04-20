@@ -14,8 +14,8 @@ namespace ModerationToolbox
             public string UserId { get; set; }
             public string Reason { get; set; } = null;
             public bool Unpunished { get; set; } = false;
-            public string Issuer { get; set; }
-            public string IssuerId { get; set; } = null;
+            public string IssuerId { get; set; }
+            public string IssuerIp { get; set; }
             public string Ip { get; set; }
             public int Length { get; set; }
             public DateTime Issued { get; set; }
@@ -38,18 +38,18 @@ namespace ModerationToolbox
                         command.CommandText = @"
 create table if not exists Punishments
 (
-    Id       int auto_increment
+    Id         int auto_increment
         primary key,
-    Username longtext    not null,
-    Type     longtext    not null,
-    UserId   longtext    not null,
-    Reason   longtext    null,
+    Username   longtext             null,
+    Type       longtext             null,
+    UserId     longtext             null,
+    Reason     longtext             null,
     Unpunished tinyint(1) default 0 not null,
-    Issuer   longtext    not null,
-    IssuerId longtext    null,
-    Ip       longtext    not null,
-    Length   int         not null,
-    Issued   datetime(6) not null
+    IssuerId   longtext             not null,
+    IssuerIp   longtext             not null,
+    Ip         longtext             null,
+    Length     int                  not null,
+    Issued     datetime(6)          not null
 );";
                         await command.ExecuteNonQueryAsync();
                     }
@@ -75,16 +75,16 @@ create table if not exists Punishments
                     using (var command = new MySqlCommand())
                     {
                         command.Connection = db.Connection;
-                        command.CommandText = "INSERT INTO Punishments (Username, Type, UserId, Reason, Issuer, IssuerId, Ip, Length, Issued) VALUES (@Username, @Type, @UserId, @Reason, @Issuer, @IssuerId, @Ip, @Length, @Issued)";
+                        command.CommandText = "INSERT INTO Punishments (Username, Type, UserId, Reason, IssuerId, IssuerIp, Ip, Length, Issued) VALUES (@Username, @Type, @UserId, @Reason, @IssuerId, @IssuerIp, @Ip, @Length, @Issued)";
                         command.Parameters.AddWithValue("@Username", punishment.Username);
                         command.Parameters.AddWithValue("@Type", punishment.Type);
                         command.Parameters.AddWithValue("@UserId", punishment.UserId);
                         command.Parameters.AddWithValue("@Reason", punishment.Reason);
-                        command.Parameters.AddWithValue("@Issuer", punishment.IssuerId);
                         command.Parameters.AddWithValue("@IssuerId", punishment.IssuerId);
+                        command.Parameters.AddWithValue("@IssuerIp", punishment.IssuerIp);
                         command.Parameters.AddWithValue("@Ip", punishment.Ip);
                         command.Parameters.AddWithValue("@Length", punishment.Length);
-                        command.Parameters.AddWithValue("@Issued", punishment.Issued);
+                        command.Parameters.AddWithValue("@Issued", punishment.Issued.ToString("yyyy-MM-dd HH:mm:ss"));
                         await command.ExecuteNonQueryAsync();
                     }
 
