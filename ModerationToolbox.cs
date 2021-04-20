@@ -40,11 +40,13 @@ namespace ModerationToolbox
             _player = new Handlers.Player();
 
             Player.Banning += _player.OnBan;
+            Player.Verified += _player.OnVerified;
         }
 
         private void UnregisterEvents()
         {
             Player.Banning -= _player.OnBan;
+            Player.Verified -= _player.OnVerified;
 
             _player = null;
         }

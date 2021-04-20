@@ -21,6 +21,13 @@ namespace ModerationToolbox
             public DateTime Issued { get; set; }
         }
 
+        public class PlayerCheckValues
+        {
+            public string Type { get; set; }
+            public int Length { get; set; }
+            public string Reason { get; set; } = null;
+        }
+
         public static async void SyncDb()
         {
             Log.Info("Syncing Database Tables");
@@ -94,6 +101,57 @@ create table if not exists Punishments
             catch (Exception e)
             {
                 Log.Error(e);
+            }
+        }
+
+        public static PlayerCheckValues CheckPlayerPunishments(string id, string ip)
+        {
+            PlayerCheckValues result = new PlayerCheckValues();
+
+            result.Length = 0;
+            result.Type = "none";
+
+            try
+            {
+                using (var db = new MySql())
+                {
+                    db.Connection.Open();
+                    using (var command = new MySqlCommand($"SELECT Type,Reason,Length,Issued FROM Punishments WHERE Unpunished LIKE false AND (UserId LIKE '{id}' OR Ip LIKE '{ip}') AND NOW() <= DATE_ADD(Issued, INTERVAL Length MINUTE);", db.Connection))
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int length = reader.GetInt32("Length");
+                            DateTime issued = reader.GetDateTime("Issued");
+                            DateTime expires = issued.AddMinutes(length);
+                            string pType = reader.GetString("Type");
+
+                            if (length != null && issued != null && pType == "ban")
+                            {
+                                string reason = reader.GetString("Reason");
+                                PlayerCheckValues returnValue = new PlayerCheckValues();
+
+                                returnValue.Reason = reason;
+                                returnValue.Length = Convert.ToInt32((expires - DateTime.Now).TotalSeconds);
+                                returnValue.Type = "ban";
+
+                                return returnValue;
+                            }
+                            else if (length != null && issued != null && pType == "mute")
+                            {
+                                result.Length = Convert.ToInt32((expires - DateTime.Now).TotalSeconds);
+                                result.Type = "mute";
+                            }
+                        }
+                    }
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+                return result;
             }
         }
     }
