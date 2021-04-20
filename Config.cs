@@ -6,7 +6,8 @@ namespace ModerationToolbox
     public sealed class Config : IConfig
     {
 	    public bool IsEnabled { get; set; } = true;
-
+        [Description("Punishment Configuration Options")]
+        public string AppealUrl { get; set; }
         [Description("Database settings; The database should be either MySQL or MariaDB")]
         public string DbHost { get; set; }
         public int DbPort { get; set; } = 1234;
