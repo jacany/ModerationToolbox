@@ -1,6 +1,10 @@
 ﻿using System;
 using Exiled.API.Enums;
 using Exiled.API.Features;
+using Exiled.Events;
+using Exiled.Loader;
+using HarmonyLib;
+using UnityEngine;
 using Player = Exiled.Events.Handlers.Player;
 
 namespace ModerationToolbox
@@ -20,37 +24,75 @@ namespace ModerationToolbox
         public override PluginPriority Priority { get; } = PluginPriority.Medium;
 
         private Handlers.Player _player;
+        private int _patches;
+        public Harmony Harmony { get; private set; }
 
-	// Gets the existing instance of the plugin
-	public static ModerationToolbox Instance => singleton;
+	    // Gets the existing instance of the plugin
+	    public static ModerationToolbox Instance => singleton;
 
         public override void OnEnabled()
         {
-            Log.Info("Enabled :)");
+            base.OnEnabled();
+            UnpatchExiledEvents();
+            Patch();
             RegisterEvents();
             Db.SyncDb();
         }
 
         public override void OnDisabled()
         {
-            Log.Info("Disabled :(");
+            base.OnDisabled();
             UnregisterEvents();
+            Unpatch();
         }
 
         private void RegisterEvents()
         {
             _player = new Handlers.Player();
 
-            Player.Banning += _player.OnBan;
             Player.Verified += _player.OnVerified;
         }
 
         private void UnregisterEvents()
         {
-            Player.Banning -= _player.OnBan;
             Player.Verified -= _player.OnVerified;
 
             _player = null;
+        }
+
+        private void Patch()
+        {
+            try
+            {
+                Harmony = new Harmony($"ModerationToolbox.{++_patches}");
+
+                var lastDebugStatus = Harmony.DEBUG;
+                Harmony.DEBUG = true;
+
+                Harmony.PatchAll();
+
+                Harmony.DEBUG = lastDebugStatus;
+
+                Log.Debug("Patches applied Successfully!", Loader.ShouldDebugBeShown);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Patching Failed {e}");
+            }
+        }
+
+        private void Unpatch()
+        {
+            Harmony.UnpatchAll();
+
+            Log.Debug("Patches have been undone!", Loader.ShouldDebugBeShown);
+        }
+
+        private void UnpatchExiledEvents()
+        {
+            Events.DisabledPatchesHashSet.Add(AccessTools.Method(typeof(BanPlayer), nameof(BanPlayer.BanUser), new[] { typeof(GameObject), typeof(int), typeof(string), typeof(string), typeof(bool) }));
+
+            Events.Instance.ReloadDisabledPatches();
         }
     }
 }

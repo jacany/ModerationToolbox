@@ -15,36 +15,13 @@ namespace ModerationToolbox.Handlers
             }
             else if (result.Type == "ban")
             {
-                string reason = $"You have been banned\nReason: {result.Reason}";
-                if (ModerationToolbox.Instance.Config.AppealUrl != null)
+                string reason = $"You have been banned.";
+                if (!string.IsNullOrEmpty(result.Reason))
+                    reason = reason + $"\nReason: {result.Reason}";
+                if (!string.IsNullOrEmpty(ModerationToolbox.Instance.Config.AppealUrl))
                     reason = reason + $"\nAppeal at: {ModerationToolbox.Instance.Config.AppealUrl}";
 
                 ev.Player.Disconnect(reason);
-            }
-        }
-
-        public void OnBan(BanningEventArgs ev)
-        {
-            if (ev.IsAllowed)
-            {
-                var punishment = new Db.Punishment();
-                punishment.Username = ev.Target.Nickname;
-                punishment.Type = "ban";
-                punishment.UserId = ev.Target.UserId;
-                punishment.Reason = ev.Reason;
-                if (ev.Issuer.UserId == null)
-                {
-                    punishment.IssuerId = "Console";
-                }
-                else
-                {
-                    punishment.IssuerId = ev.Issuer.UserId;
-                }
-                punishment.IssuerIp = ev.Issuer.IPAddress;
-                punishment.Ip = ev.Target.IPAddress;
-                punishment.Length = ev.Duration / 60;
-                punishment.Issued = DateTime.Now;
-                Db.AddPunishment(punishment);
             }
         }
     }
