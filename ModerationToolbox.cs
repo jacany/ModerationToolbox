@@ -7,7 +7,7 @@ namespace ModerationToolbox
 {
     public class ModerationToolbox : Plugin<Config>
     {
-        public static ModerationToolbox Instance { get; } = new ModerationToolbox();
+        private static ModerationToolbox singleton = new ModerationToolbox();
 
         private ModerationToolbox() { }
 
@@ -20,6 +20,9 @@ namespace ModerationToolbox
         public override PluginPriority Priority { get; } = PluginPriority.Medium;
 
         private Handlers.Player _player;
+
+	// Gets the existing instance of the plugin
+	public static ModerationToolbox Instance => singleton;
 
         public override void OnEnabled()
         {
