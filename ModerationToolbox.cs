@@ -23,7 +23,6 @@ namespace ModerationToolbox
 
         public override void OnEnabled()
         {
-            if (!Config.IsEnabled) return;
             Log.Info("Enabled :)");
             RegisterEvents();
             Db.SyncDb();
