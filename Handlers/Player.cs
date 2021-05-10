@@ -26,7 +26,6 @@ namespace ModerationToolbox.Handlers
             }
 
             string userGroup = await Db.GetPlayer(ev.Player.UserId);
-            Log.Info(userGroup);
 
             // idk why vs is saying this doesn't exist, but it compiles so idk wtf is happening
             UserGroup grp = ServerStatic.GetPermissionsHandler()._groups[userGroup];
