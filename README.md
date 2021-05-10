@@ -12,7 +12,6 @@
 - [x] Connecting to Database
 - [ ] Muting Players
 - [X] Banning Players
-- [ ] Kicking Players
 
 ## Building from Source
 
