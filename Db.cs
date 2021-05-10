@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using MySqlConnector;
 using Exiled.API.Features;
 
@@ -57,6 +58,14 @@ create table if not exists Punishments
     Ip         longtext             null,
     Length     int                  not null,
     Issued     datetime(6)          not null
+);
+
+create table if not exists Users
+(
+    Id     text not null,
+    `Rank` text null,
+    constraint Users_id_uindex
+        unique (Id) using hash
 );";
                         await command.ExecuteNonQueryAsync();
                     }
@@ -153,6 +162,28 @@ create table if not exists Punishments
                 Log.Error(e);
                 return result;
             }
+        }
+
+        public static async Task<string> GetPlayer(string id)
+        {
+            try
+            {
+                using (var db = new MySql())
+                {
+                    await db.Connection.OpenAsync();
+                    using (var cmd = new MySqlCommand($"SELECT Rank FROM Users WHERE Id LIKE '{id}'", db.Connection))
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                        while (await reader.ReadAsync())
+                            return reader.GetString("Rank");
+                }
+
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+
+            return "";
         }
     }
 
