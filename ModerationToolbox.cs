@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.Events;
@@ -33,6 +34,19 @@ namespace ModerationToolbox
         public override void OnEnabled()
         {
             base.OnEnabled();
+            var attribute = Assembly.GetAssembly(typeof(ModerationToolbox)).GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+            Log.Info(
+                @"
+ _____ ______   _________   
+|\   _ \  _   \|\___   ___\ 
+\ \  \\\__\ \  \|___ \  \_| 
+ \ \  \\|__| \  \   \ \  \  
+  \ \  \    \ \  \   \ \  \ 
+   \ \__\    \ \__\   \ \__\
+    \|__|     \|__|    \|__|
+ModerationToolbox by jacany
+Build " + (attribute == null ? $"{Version.Major}.{Version.Minor}.{Version.Build}" : attribute.InformationalVersion) + @"
+(c) 2021 Fallen-Networks");
             UnpatchExiledEvents();
             Patch();
             RegisterEvents();
