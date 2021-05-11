@@ -91,6 +91,7 @@ namespace ModerationToolbox
         private void UnpatchExiledEvents()
         {
             Events.DisabledPatchesHashSet.Add(AccessTools.Method(typeof(BanPlayer), nameof(BanPlayer.BanUser), new[] { typeof(GameObject), typeof(int), typeof(string), typeof(string), typeof(bool) }));
+            Events.DisabledPatchesHashSet.Add(AccessTools.PropertySetter(typeof(CharacterClassManager), nameof(CharacterClassManager.NetworkMuted)));
 
             Events.Instance.ReloadDisabledPatches();
         }
