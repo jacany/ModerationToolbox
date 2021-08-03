@@ -1,8 +1,7 @@
 <p align="center">
-  <img width="400" src="https://fallen-networks.com/uploads/monthly_2021_03/banner.png.774df3afa399ae4bc159974df0bf4524.png" />
   <h3 align="center">ModerationToolbox</h3>
   <p align="center">An SCP: SL Plugin that transends player punishments, targeting servers running <a href="https://github.com/Exiled-Team/EXILED" target="_blank">EXILED</a>.</p>
-  <p align="center"><a href="https://github.com/Fallen-Networks/ModerationToolbox/actions/workflows/build.yml" target="_blank"><img src="https://github.com/Fallen-Networks/ModerationToolbox/actions/workflows/build.yml/badge.svg" /></a>    <a href="https://discord.gg/fallennetworks" target="_blank"><img src="https://img.shields.io/discord/261260904656535552?logo=discord" /></a></p>
+  <p align="center"><a href="https://github.com/jacany/ModerationToolbox/actions/workflows/build.yml" target="_blank"><img src="https://github.com/jacany/ModerationToolbox/actions/workflows/build.yml/badge.svg" /></a></p>
 </p>
 
 ---
@@ -15,7 +14,7 @@
 
 ## Building from Source
 
-Run `git clone --recursive https://github.com/Fallen-Networks/ModerationToolbox.git` to clone the repository.
+Run `git clone --recursive https://github.com/jacany/ModerationToolbox.git` to clone the repository.
 
 There are two ways to build. <br />
 <a href="#visual-studio-2019">Visual Studio 2019</a> <br />

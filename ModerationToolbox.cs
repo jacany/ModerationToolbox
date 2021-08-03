@@ -45,8 +45,7 @@ namespace ModerationToolbox
    \ \__\    \ \__\   \ \__\
     \|__|     \|__|    \|__|
 ModerationToolbox by jacany
-Build " + (attribute == null ? $"{Version.Major}.{Version.Minor}.{Version.Build}" : attribute.InformationalVersion) + @"
-Copyright (c) 2021 Fallen-Networks LLC");
+Build " + (attribute == null ? $"{Version.Major}.{Version.Minor}.{Version.Build}" : attribute.InformationalVersion));
             UnpatchExiledEvents();
             Patch();
             RegisterEvents();
