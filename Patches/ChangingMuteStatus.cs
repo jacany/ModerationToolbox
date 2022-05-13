@@ -3,7 +3,7 @@ using Exiled.Events.EventArgs;
 using Exiled.Events.Handlers;
 using HarmonyLib;
 
-namespace ModerationToolbox.Patches {
+namespace PlayerManager.Patches {
 
     [HarmonyPatch(typeof(CharacterClassManager), nameof(CharacterClassManager.NetworkMuted), MethodType.Setter)]
     internal static class ChangingMuteStatus

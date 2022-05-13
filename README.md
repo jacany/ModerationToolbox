@@ -1,20 +1,21 @@
 <p align="center">
-  <h3 align="center">ModerationToolbox</h3>
+  <h3 align="center">PlayerManager</h3>
   <p align="center">An SCP: SL Plugin that transends player punishments, targeting servers running <a href="https://github.com/Exiled-Team/EXILED" target="_blank">EXILED</a>.</p>
-  <p align="center"><a href="https://github.com/jacany/ModerationToolbox/actions/workflows/build.yml" target="_blank"><img src="https://github.com/jacany/ModerationToolbox/actions/workflows/build.yml/badge.svg" /></a></p>
+  <p align="center"><a href="https://github.com/jacany/PlayerManager/actions/workflows/build.yml" target="_blank"><img src="https://github.com/jacany/PlayerManager/actions/workflows/build.yml/badge.svg" /></a></p>
 </p>
 
 ---
 
 ## Features
 
-- [x] Connecting to Database
-- [ ] Muting Players
-- [X] Banning Players
+-   [x] Connecting to Database
+-   [ ] Muting Players
+-   [x] Banning Players
+-   [ ] Player Permission Handling
 
 ## Building from Source
 
-Run `git clone --recursive https://github.com/jacany/ModerationToolbox.git` to clone the repository.
+Run `git clone https://github.com/jacany/PlayerManager` to clone the repository.
 
 There are two ways to build. <br />
 <a href="#visual-studio-2019">Visual Studio 2019</a> <br />

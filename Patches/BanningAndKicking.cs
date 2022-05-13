@@ -5,7 +5,7 @@ using GameCore;
 using HarmonyLib;
 using Mirror;
 using UnityEngine;
-namespace ModerationToolbox.Patches
+namespace PlayerManager.Patches
 {
     [HarmonyPatch(typeof(BanPlayer), nameof(BanPlayer.BanUser), new[] { typeof(GameObject), typeof(int), typeof(string), typeof(string), typeof(bool) })]
     internal static class BanningAndKicking
@@ -39,8 +39,8 @@ namespace ModerationToolbox.Patches
                 string message = $"You have been {((duration > 0) ? "banned" : "kicked")}. ";
                 if (!string.IsNullOrEmpty(reason))
                     message = message + "\nReason: " + reason;
-                if (!string.IsNullOrEmpty(ModerationToolbox.Instance.Config.AppealUrl) && duration > 0)
-                    message = message + $"\nAppeal at: {ModerationToolbox.Instance.Config.AppealUrl}";
+                if (!string.IsNullOrEmpty(PlayerManager.Instance.Config.AppealUrl) && duration > 0)
+                    message = message + $"\nAppeal at: {PlayerManager.Instance.Config.AppealUrl}";
 
                 if (!ServerStatic.GetPermissionsHandler().IsVerified || !targetPlayer.IsStaffBypassEnabled)
                 {
@@ -124,7 +124,7 @@ namespace ModerationToolbox.Patches
             }
             catch (Exception e)
             {
-                Exiled.API.Features.Log.Error($"ModerationToolbox.Patches.BanningAndKicking: {e}\n{e.StackTrace}");
+                Exiled.API.Features.Log.Error($"PlayerManager.Patches.BanningAndKicking: {e}\n{e.StackTrace}");
 
                 return true;
             }

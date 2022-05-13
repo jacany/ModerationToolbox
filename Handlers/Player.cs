@@ -2,7 +2,7 @@
 using Exiled.API.Features;
 using Exiled.Events.EventArgs;
 
-namespace ModerationToolbox.Handlers
+namespace PlayerManager.Handlers
 {
     class Player
     {
@@ -19,8 +19,8 @@ namespace ModerationToolbox.Handlers
                 string reason = $"You have been banned.";
                 if (!string.IsNullOrEmpty(result.Reason))
                     reason = reason + $"\nReason: {result.Reason}";
-                if (!string.IsNullOrEmpty(ModerationToolbox.Instance.Config.AppealUrl))
-                    reason = reason + $"\nAppeal at: {ModerationToolbox.Instance.Config.AppealUrl}";
+                if (!string.IsNullOrEmpty(PlayerManager.Instance.Config.AppealUrl))
+                    reason = reason + $"\nAppeal at: {PlayerManager.Instance.Config.AppealUrl}";
 
                 ev.Player.Disconnect(reason);
             }

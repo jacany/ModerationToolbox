@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "dgSpecHash": "qMmorBxJpruzyqe94nqgge20Ue86lsbiGl9aQ5C4jaRv+Lmq2jCCSfw01OwzOBCDuFy3rO1LIsY226nG/+aDJA==",
+  "success": true,
+  "projectFilePath": "/home/jack/PlayerManager/PlayerManager.csproj",
+  "expectedPackageFiles": [
+    "/home/jack/.nuget/packages/exiled/5.2.1/exiled.5.2.1.nupkg.sha512",
+    "/home/jack/.nuget/packages/lib.harmony/2.2.1/lib.harmony.2.2.1.nupkg.sha512",
+    "/home/jack/.nuget/packages/microsoft.netframework.referenceassemblies/1.0.2/microsoft.netframework.referenceassemblies.1.0.2.nupkg.sha512",
+    "/home/jack/.nuget/packages/microsoft.netframework.referenceassemblies.net472/1.0.2/microsoft.netframework.referenceassemblies.net472.1.0.2.nupkg.sha512",
+    "/home/jack/.nuget/packages/mysqlconnector/2.1.8/mysqlconnector.2.1.8.nupkg.sha512",
+    "/home/jack/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512",
+    "/home/jack/.nuget/packages/system.diagnostics.diagnosticsource/5.0.1/system.diagnostics.diagnosticsource.5.0.1.nupkg.sha512",
+    "/home/jack/.nuget/packages/system.memory/4.5.4/system.memory.4.5.4.nupkg.sha512",
+    "/home/jack/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
+    "/home/jack/.nuget/packages/system.runtime.compilerservices.unsafe/5.0.0/system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512",
+    "/home/jack/.nuget/packages/system.threading.tasks.extensions/4.3.0/system.threading.tasks.extensions.4.3.0.nupkg.sha512"
+  ],
+  "logs": []
+}

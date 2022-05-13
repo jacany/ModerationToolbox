@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using Exiled.API.Interfaces;
 
-namespace ModerationToolbox
+namespace PlayerManager
 {
     public sealed class Config : IConfig
     {

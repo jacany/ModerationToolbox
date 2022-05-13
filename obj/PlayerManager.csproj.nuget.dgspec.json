@@ -1,0 +1,65 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/jack/PlayerManager/PlayerManager.csproj": {}
+  },
+  "projects": {
+    "/home/jack/PlayerManager/PlayerManager.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/jack/PlayerManager/PlayerManager.csproj",
+        "projectName": "PlayerManager",
+        "projectPath": "/home/jack/PlayerManager/PlayerManager.csproj",
+        "packagesPath": "/home/jack/.nuget/packages/",
+        "outputPath": "/home/jack/PlayerManager/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/jack/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "targetAlias": "net472",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "dependencies": {
+            "EXILED": {
+              "target": "Package",
+              "version": "[5.2.1, )"
+            },
+            "Lib.Harmony": {
+              "target": "Package",
+              "version": "[2.2.1, )"
+            },
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.2, )",
+              "autoReferenced": true
+            },
+            "MySqlConnector": {
+              "target": "Package",
+              "version": "[2.1.8, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

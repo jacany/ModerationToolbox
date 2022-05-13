@@ -8,19 +8,19 @@ using HarmonyLib;
 using UnityEngine;
 using Player = Exiled.Events.Handlers.Player;
 
-namespace ModerationToolbox
+namespace PlayerManager
 {
-    public class ModerationToolbox : Plugin<Config>
+    public class PlayerManager : Plugin<Config>
     {
-        private static ModerationToolbox singleton = new ModerationToolbox();
+        private static PlayerManager singleton = new PlayerManager();
 
-        private ModerationToolbox() { }
+        private PlayerManager() { }
 
-        public override string Name { get; } = "ModerationToolbox";
+        public override string Name { get; } = "PlayerManager";
         public override string Author { get; } = "jacany";
-        public override string Prefix { get; } = "ModerationToolbox";
+        public override string Prefix { get; } = "PlayerManager";
         public override Version Version { get; } = new Version(1, 0, 0);
-        public override Version RequiredExiledVersion { get; } = new Version(2, 8, 0);
+        public override Version RequiredExiledVersion { get; } = new Version(5, 2, 1);
 
         public override PluginPriority Priority { get; } = PluginPriority.Medium;
 
@@ -29,22 +29,22 @@ namespace ModerationToolbox
         public Harmony Harmony { get; private set; }
 
 	    // Gets the existing instance of the plugin
-	    public static ModerationToolbox Instance => singleton;
+	    public static PlayerManager Instance => singleton;
 
         public override void OnEnabled()
         {
             base.OnEnabled();
-            var attribute = Assembly.GetAssembly(typeof(ModerationToolbox)).GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+            var attribute = Assembly.GetAssembly(typeof(PlayerManager)).GetCustomAttribute<AssemblyInformationalVersionAttribute>();
             Log.Info(
                 @"
- _____ ______   _________   
-|\   _ \  _   \|\___   ___\ 
-\ \  \\\__\ \  \|___ \  \_| 
- \ \  \\|__| \  \   \ \  \  
-  \ \  \    \ \  \   \ \  \ 
-   \ \__\    \ \__\   \ \__\
-    \|__|     \|__|    \|__|
-ModerationToolbox by jacany
+ ________  _____ ______      
+|\   __  \|\   _ \  _   \    
+\ \  \|\  \ \  \\\__\ \  \   
+ \ \   ____\ \  \\|__| \  \  
+  \ \  \___|\ \  \    \ \  \ 
+   \ \__\    \ \__\    \ \__\
+    \|__|     \|__|     \|__|
+PlayerManager by jacany
 Build " + (attribute == null ? $"{Version.Major}.{Version.Minor}.{Version.Build}" : attribute.InformationalVersion));
             UnpatchExiledEvents();
             Patch();
@@ -77,7 +77,7 @@ Build " + (attribute == null ? $"{Version.Major}.{Version.Minor}.{Version.Build}
         {
             try
             {
-                Harmony = new Harmony($"ModerationToolbox.{++_patches}");
+                Harmony = new Harmony($"PlayerManager.{++_patches}");
 
                 var lastDebugStatus = Harmony.DEBUG;
                 Harmony.DEBUG = true;

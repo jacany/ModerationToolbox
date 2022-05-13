@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MySqlConnector;
 using Exiled.API.Features;
 
-namespace ModerationToolbox
+namespace PlayerManager
 {
     public class Db
     {
@@ -189,11 +189,11 @@ create table if not exists Users
 
     public class MySql : IDisposable
     {
-        public string Server = ModerationToolbox.Instance.Config.DbHost;
-        public int Port = ModerationToolbox.Instance.Config.DbPort;
-        public string Username = ModerationToolbox.Instance.Config.DbUser;
-        public string Password = ModerationToolbox.Instance.Config.DbPassword;
-        public string Database = ModerationToolbox.Instance.Config.DbSchema;
+        public string Server = PlayerManager.Instance.Config.DbHost;
+        public int Port = PlayerManager.Instance.Config.DbPort;
+        public string Username = PlayerManager.Instance.Config.DbUser;
+        public string Password = PlayerManager.Instance.Config.DbPassword;
+        public string Database = PlayerManager.Instance.Config.DbSchema;
 
         public MySqlConnection Connection { get; set; }
 

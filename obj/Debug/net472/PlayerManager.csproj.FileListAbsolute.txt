@@ -1,0 +1,5 @@
+/home/jack/PlayerManager/obj/Debug/net472/PlayerManager.csproj.AssemblyReference.cache
+/home/jack/PlayerManager/obj/Debug/net472/PlayerManager.GeneratedMSBuildEditorConfig.editorconfig
+/home/jack/PlayerManager/obj/Debug/net472/PlayerManager.AssemblyInfoInputs.cache
+/home/jack/PlayerManager/obj/Debug/net472/PlayerManager.AssemblyInfo.cs
+/home/jack/PlayerManager/obj/Debug/net472/PlayerManager.csproj.CoreCompileInputs.cache
